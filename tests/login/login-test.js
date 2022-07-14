@@ -1,4 +1,3 @@
-const until = require('selenium-webdriver')
 const Driver = require('selenium-webdriver/chrome');
 const LoginPage = require('../../pages/login/login-page');
 const LogoutPage = require('../../pages/login/logout-page');
