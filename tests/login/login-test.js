@@ -17,7 +17,7 @@ describe('Login',function(){
     let notiWhenUsernameOrPasswordFalse = "Tên tài khoản hoặc mật khẩu không chính xác"
     let notiWhenNotEnterUsername = "Tên tài khoản là bắt buộc"
     let notiWhenNotEnterPassword = "Mật khẩu là bắt buộc"
-    url = "https://sb.halome.dev/"
+    let url = "https://sb.halome.dev/"
     
 
     beforeEach(async function(){
