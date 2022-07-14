@@ -1,17 +1,17 @@
 class LogoutLocator{
-    get_avatar_button_xpath(){
+    getAvatarButtonXpath(){
             return "/html/body/div/div/div[1]/div/div/img";
     };
 
-    get_avatar_not_img_xpath(){
+    getAvatarNotImgXpath(){
         return "/html/body/div/div/div[1]/div/div/span";
     };
 
-    get_logout_button_xpath(){
+    getLogoutButtonXpath(){
         return "/html/body/div/div/div[2]/div[2]/div/div/div/div[5]/div[6]";
     };
 
-    get_ok_button_id(){
+    getOkButtonId(){
         return "modal-button-ok";
     };
 
