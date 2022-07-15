@@ -19,23 +19,23 @@ class LogoutPage{
     }
    
     async clickAvatarButton(){
-        const avatar_button = await this.driver.wait(until.elementLocated(By.xpath(LogoutLocator.getAvatarButtonXpath())),3000);
-        await avatar_button.click();
+        const avatarButton = await this.driver.wait(until.elementLocated(By.xpath(LogoutLocator.getAvatarButtonXpath())),3000);
+        await avatarButton.click();
     }
 
     async clickAvatarNotImgButton(){
-        const avatar_not_img = await this.driver.wait(until.elementLocated(By.xpath(LogoutLocator.getAvatarNotImgXpath())),3000);
-        await avatar_not_img.click();
+        const avatarNotImg = await this.driver.wait(until.elementLocated(By.xpath(LogoutLocator.getAvatarNotImgXpath())),3000);
+        await avatarNotImg.click();
     }
 
     async clickLogOutButton(){
-        const log_out = await this.driver.wait(until.elementLocated(By.xpath(LogoutLocator.getLogoutButtonXpath())),3000);
-        await log_out.click();
+        const logOut = await this.driver.wait(until.elementLocated(By.xpath(LogoutLocator.getLogoutButtonXpath())),3000);
+        await logOut.click();
     }
 
     async clickOkButton(){
-        const ok_button = await this.driver.wait(until.elementLocated(By.id(LogoutLocator.getOkButtonId())),3000);
-        await ok_button.click();
+        const okButton = await this.driver.wait(until.elementLocated(By.id(LogoutLocator.getOkButtonId())),3000);
+        await okButton.click();
     }
 }
 

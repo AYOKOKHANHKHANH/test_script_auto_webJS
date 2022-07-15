@@ -12,23 +12,28 @@ class LoginPage{
     async load(){
         await this.driver.get('https://sb.halome.dev/');
         await this.driver.manage().setTimeouts({ implicit: 10000 });
+        await this.clickLoginWithHahaButton();
     };
 
-    async login(username, pwd, pin){
-        await this.load();
-        await this.clickLoginWithHahaButton();
-        await this.driver.sleep(500)
+    async login(username, pwd){
+        await this.driver.sleep(1000)
         await this.enterUsername(username);
         await this.enterPass(pwd);
+        await this.clickLoginButton()
         try{
-            await this.clickLoginButton()
-            await this.clickContinueButton();
-            try{
-                await this.enterPinCode(pin);
-                await this.clickAcceptButton();
-            }
-            catch(e){
-            }
+            await this.clickContinueButton()
+        }
+        catch(e){
+        }
+
+    }
+
+
+    async loginSuccess(pin){
+        await this.clickContinueButton()
+        try{
+            await this.enterPinCode(pin);
+            await this.clickAcceptButton();
         }
         catch(e){
         }
@@ -36,9 +41,10 @@ class LoginPage{
 
    
     async clickLoginWithHahaButton(){
-        const login_wt_haha = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getLoginWithHahaButtonId())),3000);
-        await login_wt_haha.click();
+        const loginWithtHaha = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getLoginWithHahaButtonId())),3000);
+        await loginWithtHaha.click();
     };
+
     
     async enterUsername(username){
         await this.driver.wait(until.titleIs('Đăng nhập | Hahalolo'))
@@ -51,6 +57,7 @@ class LoginPage{
         })
     };
 
+
     async enterPass(pass){
         await this.driver.wait(until.titleIs('Đăng nhập | Hahalolo'))
         await Promise.any([this.driver.wait(until.elementLocated({ id: LoginLocator.getPassId() }))])
@@ -62,48 +69,71 @@ class LoginPage{
         })
     }
 
+
     async clickContinueButton (){
-        const continue_button = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getContinueButtonId())),10000);
-        await continue_button.click();
+        const continueButton = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getContinueButtonId())),10000);
+        await continueButton.click();
     }
+
 
     async enterPinCode(pincode){
         const pin = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getPinXpath())),3000);
         await pin.sendKeys(pincode);
     }
 
+
     async clickAcceptButton(){
-        const accept_button = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getAcceptButtonId())),3000);
-        await accept_button.click();
+        const acceptButton = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getAcceptButtonId())),3000);
+        await acceptButton.click();
     }
+
 
     async clickLoginButton(){
-        const login_button = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getLoginButtonXpath())),10000);
-        await login_button.click();
+        const loginButton = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getLoginButtonXpath())),10000);
+        await loginButton.click()
     }
+
 
     async getTextNotiWhenLoginFail(){
-        const get_text = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotiWhenLoginFailXpath())),3000).getText()
-        return get_text
-        // console.log(get_text);
+        const getText = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotiWhenLoginFailXpath())),3000).getText()
+        return getText
     }
+
 
     async getTextNotiWhenNotEnterUsername(){
-        const get_text = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotiWhenNotEnterUsernameXpath())),3000).getText()
-        return get_text
+        const getText = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotiWhenNotEnterUsernameXpath())),3000).getText()
+        return getText
     }
 
+
     async getTextNotiWhenNotEnterPassword(){
-        const get_text = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotiWhenNotEnterPasswordXpath())),3000).getText()
-        return get_text
+        const getText = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotiWhenNotEnterPasswordXpath())),3000).getText()
+        return getText
     }
+
 
     async getUrlCurrent(){
         await this.driver.wait(until.urlIs('https://sb.halome.dev/'))
         const currentURL = await this.driver.getCurrentUrl();
-        return currentURL;
+        return currentURL
     }
 
+
+    async clickNotMeButton(){
+        const notMe = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotMeButtonXpath())),3000);
+        return notMe.click()
+    }
+
+
+    async clickBackButton(){
+        const back = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getBackButtonXpath())),3000);
+        return back.click()
+    }
+
+    async getTitleEnterPin(){
+        const title = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getTitleEnterPinXpath())),3000).getText()
+        return title
+    }
 }
 
 module.exports = LoginPage;
