@@ -15,7 +15,5 @@ class LogoutLocator{
         return "modal-button-ok";
     };
 
-   
-
 };
 module.exports= new LogoutLocator();
