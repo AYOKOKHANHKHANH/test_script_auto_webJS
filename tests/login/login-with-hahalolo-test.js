@@ -125,7 +125,6 @@ describe('Login',function(){
     it('Test Continue Button', async function(){
         await loginPage.login(username, pass)
         await loginPage.clickContinueButton()
-        await driver.sleep(500)
 
         let title = await loginPage.getTitleEnterPin()
         assert.strictEqual(title, 'Nhập mã Pin')
