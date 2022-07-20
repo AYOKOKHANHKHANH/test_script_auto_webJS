@@ -1,14 +1,10 @@
 class LogoutLocator{
-    getAvatarButtonXpath(){
-            return "/html/body/div/div/div[1]/div/div/img";
+    getAvatarButtonId(){
+            return "auth-user-profile-button";
     };
 
-    getAvatarNotImgXpath(){
-        return "/html/body/div/div/div[1]/div/div/span";
-    };
-
-    getLogoutButtonXpath(){
-        return "/html/body/div/div/div[2]/div[2]/div/div/div/div[5]/div[6]";
+    getLogoutButtonCss(){
+        return '[data-id="auth-user-content-button-logout"]';
     };
 
     getOkButtonId(){
