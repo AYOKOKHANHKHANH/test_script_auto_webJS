@@ -3,10 +3,6 @@ class LoginAnonymousLocator{
         return "platforms-halome"
     }
 
-    getAreaCodeXpath(){
-        return "/html/body/div/div/div[2]/div/div/form/div[1]/div/button"
-    }
-
     getPhoneNumberId(){
         return "phone-login-form-input-phone"
     }
