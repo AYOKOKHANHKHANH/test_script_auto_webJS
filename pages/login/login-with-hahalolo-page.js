@@ -1,8 +1,7 @@
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const {By, until} = require('selenium-webdriver');
 const DriverManager = require('../../driver-manager/setup-driver')
-
 const LoginLocator = require ('../../locators/login/login-with-hahalolo-locator');
-const { driver } = require('./logout-page');
+
 
 class LoginPage{
     constructor(driver){
@@ -20,11 +19,6 @@ class LoginPage{
         await this.enterUsername(username);
         await this.enterPass(pwd);
         await this.clickLoginButton()
-        try{
-            await this.clickContinueButton()
-        }
-        catch(e){
-        }
 
     }
 
@@ -48,13 +42,9 @@ class LoginPage{
     
     async enterUsername(username){
         await this.driver.wait(until.titleIs('Đăng nhập | Hahalolo'))
-        await Promise.any([this.driver.wait(until.elementLocated({ id: LoginLocator.getUsernameId()}))])
-        .then((el) => {
-            el.sendKeys(username) 
-        }
-        ).catch((err) => {
-            console.log(err)
-        })
+        const element = await this.driver.findElement(By.id(LoginLocator.getUsernameId()))
+        const title = await this.driver.wait(until.elementIsVisible(element),30000)
+        await title.sendKeys(username)
     };
 
 
@@ -95,20 +85,22 @@ class LoginPage{
 
 
     async getTextNotiWhenLoginFail(){
-        const getText = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotiWhenLoginFailXpath())),3000).getText()
-        return getText
+        const element = await this.driver.findElement(By.xpath(LoginLocator.getNotiWhenLoginFailXpath()))
+        let getTextNoti = await this.driver.wait(until.elementTextIs(element, 'Tên tài khoản hoặc mật khẩu không chính xác'),3000).getText()
+        console.log(getTextNoti)
+        return getTextNoti
     }
 
 
     async getTextNotiWhenNotEnterUsername(){
-        const getText = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotiWhenNotEnterUsernameXpath())),3000).getText()
-        return getText
+        const getTextNoti = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotiWhenNotEnterUsernameXpath())),3000).getText()
+        return getTextNoti
     }
 
 
     async getTextNotiWhenNotEnterPassword(){
-        const getText = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotiWhenNotEnterPasswordXpath())),3000).getText()
-        return getText
+        const getTextNoti = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotiWhenNotEnterPasswordXpath())),3000).getText()
+        return getTextNoti
     }
 
 
@@ -119,19 +111,23 @@ class LoginPage{
     }
 
 
-    async clickNotMeButton(){
-        const notMe = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getNotMeButtonXpath())),3000);
-        return notMe.click()
+    async clickNotYouButton(){
+        const notYou = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getNotYouButtonId())),3000);
+        return notYou.click()
     }
 
 
     async clickBackButton(){
-        const back = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getBackButtonXpath())),3000);
+        const back = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getBackButtonId())),3000);
         return back.click()
     }
 
     async getTitleEnterPin(){
-        const title = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getTitleEnterPinXpath())),3000).getText()
+
+        const element = await this.driver.findElement(By.id(LoginLocator.getTitleEnterPinId()))
+        let title = await this.driver.wait(until.elementTextIs(element, 'Nhập mã Pin'),3000).getText()
+
+        // const title = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getTitleEnterPinId())),10000).getText()
         return title
     }
 }
