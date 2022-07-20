@@ -12,7 +12,7 @@ class LoginLocator{
         };
 
         getContinueButtonId(){
-                return "platforms-halo";
+                return "halo-login-form-button-ok";
         };
 
         getPinXpath(){
@@ -20,7 +20,7 @@ class LoginLocator{
         };
 
         getAcceptButtonId(){
-                return "platforms-halo";
+                return "otp-form-need-button-ok";
         };
 
         getLoginButtonXpath(){
@@ -39,17 +39,19 @@ class LoginLocator{
                 return "/html/body/div/div[1]/div/div[1]/div/div[2]/div/div/div/div[1]/div[2]/div/div/div/p/span"
         }
 
-        getBackButtonXpath(){
-                return "/html/body/div/div/div[2]/div/div/div[5]/h1"
+        getBackButtonId(){
+                return "auth-wrapper-go-back"
         }
 
-        getNotMeButtonXpath(){
-                return "/html/body/div/div/div[2]/div/div/div[3]/div/p[2]"
+        getNotYouButtonId(){
+                return "halo-login-form-button-logout"
         }
 
-        getTitleEnterPinXpath(){
-                return "/html/body/div/div/div[2]/div/div/span"
+        getTitleEnterPinId(){
+                return "auth-wrapper-title"
         }
+
+       
 }
 
 module.exports= new LoginLocator();
