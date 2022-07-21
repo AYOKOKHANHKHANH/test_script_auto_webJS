@@ -16,36 +16,33 @@ class LoginAnonymousPage{
     };
 
 
-    async login(phone, otp, name){
+    async login(phone, otp){
         await this.enterPhoneNumber(phone)
         try{
             await this.clickStart()
             await this.enterOtpCode(otp)
-            try{
-                await this.clickResendOtpViaSms()
-                await this.reEnterOtpCode(otp)
-            }
-            catch(e){
-                await this.enterUsername(name)
-                await this.clickContinueButton()
-            }
+            await this.clickResendOtpViaSms()
+            await this.reEnterOtpCode(otp)
         }
         catch (e){
-
         }
-
-
     }
+
+    async theFirstLogin(name){
+        try{
+            await this.enterUsername(name)
+            await this.clickContinueButton()
+        }
+        catch (e) {
+            await this.clickContinueButton()
+        }
+    }
+
 
 
     async clickLoginAnony(){
         const loginAnony = await this.driver.wait(until.elementLocated(By.id(LoginAnonymousLocator.getLoginAnonyButtonId())),3000)
         await loginAnony.click()
-    }
-
-    async clickAreaCode(){
-        const areaCode = await this.driver.wait(until.elementLocated(By.xpath(LoginAnonymousLocator.getAreaCodeXpath())),3000)
-        await areaCode.click()
     }
 
     async enterPhoneNumber(phone){
