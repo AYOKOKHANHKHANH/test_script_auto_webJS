@@ -1,21 +1,15 @@
 class LogoutLocator{
-    get_avatar_button_xpath(){
-            return "/html/body/div/div/div[1]/div/div/img";
+    getAvatarButtonId(){
+            return "auth-user-profile-button";
     };
 
-    get_avatar_not_img_xpath(){
-        return "/html/body/div/div/div[1]/div/div/span";
+    getLogoutButtonCss(){
+        return '[data-id="auth-user-content-button-logout"]';
     };
 
-    get_logout_button_xpath(){
-        return "/html/body/div/div/div[2]/div[2]/div/div/div/div[5]/div[6]";
-    };
-
-    get_ok_button_id(){
+    getOkButtonId(){
         return "modal-button-ok";
     };
-
-   
 
 };
 module.exports= new LogoutLocator();
