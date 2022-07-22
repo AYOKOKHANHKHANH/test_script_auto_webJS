@@ -15,11 +15,16 @@ class LoginPage{
     };
 
     async login(username, pwd){
-        await this.driver.sleep(1000)
+        // await this.driver.sleep(1000)
         await this.enterUsername(username);
         await this.enterPass(pwd);
         await this.clickLoginButton()
+        try{
+            await this.getTextNotiWhenLoginFail()
+        }
+        catch (e) {
 
+        }
     }
 
 
@@ -40,11 +45,13 @@ class LoginPage{
     };
 
     
-    async enterUsername(username){
+    async enterUsername(name){
         await this.driver.wait(until.titleIs('Đăng nhập | Hahalolo'))
-        const element = await this.driver.findElement(By.id(LoginLocator.getUsernameId()))
-        const title = await this.driver.wait(until.elementIsVisible(element),30000)
-        await title.sendKeys(username)
+        // const element = await this.driver.findElement(By.id(LoginLocator.getUsernameId()))
+        // const username = await this.driver.wait(until.elementIsVisible(element),30000)
+        const username = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getUsernameId())),15000)
+        await username.clear()
+        await username.sendKeys(name)
     };
 
 
@@ -67,7 +74,8 @@ class LoginPage{
 
 
     async enterPinCode(pincode){
-        const pin = await this.driver.wait(until.elementLocated(By.xpath(LoginLocator.getPinXpath())),3000);
+        const pin = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getPinId())),3000);
+        await pin.clear
         await pin.sendKeys(pincode);
     }
 
@@ -126,8 +134,6 @@ class LoginPage{
 
         const element = await this.driver.findElement(By.id(LoginLocator.getTitleEnterPinId()))
         let title = await this.driver.wait(until.elementTextIs(element, 'Nhập mã Pin'),3000).getText()
-
-        // const title = await this.driver.wait(until.elementLocated(By.id(LoginLocator.getTitleEnterPinId())),10000).getText()
         return title
     }
 }

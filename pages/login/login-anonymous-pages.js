@@ -1,5 +1,4 @@
 const {By, until} = require('selenium-webdriver');
-const DriverManager = require('../../driver-manager/setup-driver')
 const LoginAnonymousLocator = require ('../../locators/login/login-anonymous-locator');
 
 
@@ -22,7 +21,7 @@ class LoginAnonymousPage{
             await this.clickStart()
             await this.enterOtpCode(otp)
             await this.clickResendOtpViaSms()
-            await this.reEnterOtpCode(otp)
+            await this.enterOtpCode(otp)
         }
         catch (e){
         }
@@ -39,15 +38,15 @@ class LoginAnonymousPage{
     }
 
 
-
     async clickLoginAnony(){
         const loginAnony = await this.driver.wait(until.elementLocated(By.id(LoginAnonymousLocator.getLoginAnonyButtonId())),3000)
         await loginAnony.click()
     }
 
     async enterPhoneNumber(phone){
-        const phonenumber = await this.driver.wait(until.elementLocated(By.id(LoginAnonymousLocator.getPhoneNumberId())),3000)
-        await phonenumber.sendKeys(phone)
+        const phoneNumber = await this.driver.wait(until.elementLocated(By.id(LoginAnonymousLocator.getPhoneNumberId())),3000)
+        await phoneNumber.clear
+        await phoneNumber.sendKeys(phone)
     }
 
     async clickStart(){
@@ -61,12 +60,14 @@ class LoginAnonymousPage{
     }
 
     async enterOtpCode(otp){
-        const otpCode = await this.driver.wait(until.elementLocated(By.xpath(LoginAnonymousLocator.getOtpXpath())),3000)
+        const otpCode = await this.driver.wait(until.elementLocated(By.id(LoginAnonymousLocator.getOtpId())),3000)
+        await otpCode.clear
         await otpCode.sendKeys(otp)
     }
 
     async enterUsername(name){
         const username = await this.driver.wait(until.elementLocated(By.id(LoginAnonymousLocator.getUsernameId())),3000)
+        await username.clear
         await username.sendKeys(name)
     }
 
@@ -74,13 +75,6 @@ class LoginAnonymousPage{
         const continueButton = await this.driver.wait(until.elementLocated(By.id(LoginAnonymousLocator.getStartButtonId())),3000)
         await continueButton.click()
     }
-
-    async reEnterOtpCode(otp){
-        const otpSecond = await this.driver.wait(until.elementLocated(By.xpath(LoginAnonymousLocator.getOtpSecondXpath())),3000)
-        await otpSecond.sendKeys(otp)
-    }
-
-
 }
 
 module.exports = LoginAnonymousPage;
