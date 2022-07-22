@@ -11,12 +11,8 @@ class LoginAnonymousLocator{
         return "phone-login-form-button-ok"
     }
 
-    getOtpXpath(){
-        return "/html/body/div/div/div[2]/div/div/div[3]/div[1]/div[1]/input"
-    }
-
-    getOtpSecondXpath(){
-        return "/html/body/div/div/div[2]/div/div/div[3]/div[2]/div[1]/input"
+    getOtpId(){
+        return "phone-verify-form-input-1"
     }
 
     getResendOtpCodeViaSmsId(){

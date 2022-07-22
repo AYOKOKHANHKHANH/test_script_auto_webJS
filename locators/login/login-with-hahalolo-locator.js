@@ -15,8 +15,8 @@ class LoginLocator{
                 return "halo-login-form-button-ok";
         };
 
-        getPinXpath(){
-                return "/html/body/div/div/div[2]/div/div/div[3]/div/div[1]/div[1]/input";
+        getPinId(){
+                return "phone-verify-form-input-1";
         };
 
         getAcceptButtonId(){
